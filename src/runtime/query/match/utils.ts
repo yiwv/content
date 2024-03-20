@@ -82,6 +82,9 @@ export const sortList = (data: any[], params: SortOptions) => {
       if (params[key as keyof SortOptions] === -1) {
         values.reverse()
       }
+      if (params.$numeric && !isNaN(values[0]) && !isNaN(values[1])) {
+        return Number(values[0]) - Number(values[1])
+      }
       return comperable.compare(values[0], values[1])
     })
   }
